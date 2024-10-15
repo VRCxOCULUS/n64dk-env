@@ -1,4 +1,8 @@
 #include <nusys.h>
+#include "config.h"
+
+Gfx glist[GLIST_LENGTH];
+Gfx* glistp;
 
 static void vsyncCallback(int pendingTaskCount);
 
