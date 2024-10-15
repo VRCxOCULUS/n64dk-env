@@ -9,4 +9,6 @@
     extern Gfx glist[GLIST_LENGTH];
     extern Gfx* glistp;
 
+    void RCPInit(Gfx *glistp);
+
 #endif
