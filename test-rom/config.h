@@ -11,4 +11,10 @@
 
     void RCPInit(Gfx *glistp);
 
+    #define NTSC    0
+    #define PAL     1
+    #define MPAL    2 // Brazilian TV’s.
+    
+    #define TV_TYPE PAL
+
 #endif

@@ -1,21 +1,23 @@
 #include "stages.h"
 #include "config.h"
 
+static u8 b;
+
 void stage00_init(void)
 {
-
+    b = 255;
 }
 
 void stage00_update(void)
 {
-    
+    b -= 5;
 }
 
 void stage00_draw(void)
 {
     glistp = glist;
     RCPInit(glistp);
-    ClearBackground(0, 0, 255);
+    ClearBackground(32, 32, b);
     
     gDPFullSync(glistp++);
     gSPEndDisplayList(glistp++);
