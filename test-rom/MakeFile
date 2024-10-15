@@ -1,6 +1,6 @@
 N64KITDIR	= c:/nintendo/n64kit
 
-TARGET		= pyoro
+TARGET		= test-rom
 CODEFILES	= main.c graphic.c stage00.c
 
 
