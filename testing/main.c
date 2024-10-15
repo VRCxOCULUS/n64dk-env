@@ -5,6 +5,7 @@ static void vsyncCallback(int pendingTaskCount);
 void mainproc(void * dummy)
 {
     nuGfxInit();
+    stage00_init();
     nuGfxFuncSet((NUGfxFunc)vsyncCallback);
     NuGfxDisplayOn();
 
@@ -14,5 +15,9 @@ void mainproc(void * dummy)
 
 void vsyncCallback(int pendingTaskCount)
 {
-    
+    stage00_update();
+    if(pendingTaskCount < 1)
+    {
+        stage00_draw();
+    }
 }
