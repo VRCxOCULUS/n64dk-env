@@ -14,7 +14,10 @@
     
     Gfx glist[GLIST_LENGTH];
     Gfx* glistp;
-    
+
+    extern NUContData contdata[NU_CONT_MAXCONTROLLERS];
+    extern u8 contPattern;
+
     void RCPInit(Gfx *glistp);
 
 #endif

@@ -25,6 +25,8 @@ void stage00_init(void)
 void stage00_update(void)
 {
     b-=5;
+
+    nuContDataGetExAll(contdata);
 }
 
 

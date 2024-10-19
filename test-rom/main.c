@@ -1,26 +1,14 @@
-/*========================================================
-				Initialize the game
-========================================================*/
-/*=================================
-            Libraries
-=================================*/
-
 #include <nusys.h>
 #include "config.h"
 #include "stages.h"
 
 
-/*=================================
-             Prototypes
-=================================*/
-
 static void vsyncCallback(int pendingTaskCount);
 static void callback_prenmi();
 
+NUContData contdata[1]; // Number of controllers to keep track of (1)
+u8 contPattern; // Which controllers are plugged in
 
-/*=================================
-              Main
-=================================*/
 
 void mainproc(void * dummy)
 {
@@ -36,6 +24,8 @@ void mainproc(void * dummy)
 
     // Initialize and activate the graphics thread and Graphics Task Manager.
     nuGfxInit();
+
+    contPattern = nuContInit();
 
     // Create a callback function
     nuGfxFuncSet((NUGfxFunc)vsyncCallback);
