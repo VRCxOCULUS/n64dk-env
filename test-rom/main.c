@@ -6,7 +6,7 @@
 static void vsyncCallback(int pendingTaskCount);
 static void callback_prenmi();
 
-NUContData contdata[1]; // Number of controllers to keep track of (1)
+NUContData contdata[]; // Number of controllers to keep track of (1)
 u8 contPattern; // Which controllers are plugged in
 
 

@@ -12,8 +12,8 @@
 
     #define GLIST_LENGTH    (2048)
     
-    Gfx glist[GLIST_LENGTH];
-    Gfx* glistp;
+    extern Gfx glist[GLIST_LENGTH];
+    extern Gfx* glistp;
 
     extern NUContData contdata[NU_CONT_MAXCONTROLLERS];
     extern u8 contPattern;
