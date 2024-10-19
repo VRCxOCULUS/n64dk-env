@@ -1,7 +1,7 @@
 N64KITDIR	= c:/nintendo/n64kit
 
 TARGET		= test-rom
-CODEFILES	= main.c graphic.c stage00.c
+CODEFILES	= main.c graphic.c stage00.c sprite_testing_checkered_tile.c
 
 
 ############################################################################
