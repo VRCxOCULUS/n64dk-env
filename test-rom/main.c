@@ -9,6 +9,8 @@ static void callback_prenmi();
 NUContData contdata[]; // Number of controllers to keep track of (1)
 u8 contPattern; // Which controllers are plugged in
 
+char mem_heap[1024*512]; // half a megabyte of heap memory
+
 
 void mainproc(void * dummy)
 {
@@ -24,6 +26,10 @@ void mainproc(void * dummy)
 
     // Initialize and activate the graphics thread and Graphics Task Manager.
     nuGfxInit();
+	
+	// initial the heap for dynamic memory allocation
+	if (InitHeap(mem_heap, sizeof(mem_heap)) == -1)
+		return; // or stop the program if something horrible happens
 
     contPattern = nuContInit();
 

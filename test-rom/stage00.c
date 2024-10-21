@@ -8,8 +8,13 @@ static void ClearBackground(u8 r, u8 g, u8 b);
 
 static u8 b;
 
-static int x; // x position of sprite
-static int y;// y position of sprite
+static int x_start; // starting x position of sprite
+static int y_start; // starting y position of sprite
+
+static float checker_x;
+static float checker_y;
+float speed_x;
+float speed_y;
 
 void DrawChecker(int x, int y); // Create a prototype for function
 
@@ -17,16 +22,42 @@ void DrawChecker(int x, int y); // Create a prototype for function
 void stage00_init(void)
 {
     b = 255;
-    x = 32; // Give x a value when the stage starts
-    y = 32; // Give y a value when the stage starts
+    x_start = 32; // Give x a value when the stage starts
+    y_start = 32; // Give y a value when the stage starts
+	
+	checker_x = SCREEN_WD/2;
+	checker_y = SCREEN_HT/2;
 }
 
 
 void stage00_update(void)
 {
     b-=5;
+	
+	speed_x = 0;
+	speed_y = 0;
 
+	// Check all controllers for input
     nuContDataGetExAll(contdata);
+	
+	if (contdata[0].stick_x > 16) speed_x = MIN(64, contdata[0].stick_x);
+	else if (contdata[0].stick_x < -16) speed_x = MAX(-64, contdata[0].stick_x);
+	
+	if (contdata[0].stick_y > 16) speed_y = MIN(64, contdata[0].stick_y);
+	else if (contdata[0].stick_y < -16) speed_y = MAX(-64, contdata[0].stick_y);
+		
+	checker_x += speed_x/8;
+	checker_y -= speed_y/8;
+	
+	if (checker_x-10 < 0)
+		checker_x = 10;
+	if (checker_x+10 > SCREEN_WD)
+		checker_x = SCREEN_WD-10;
+		
+	if (checker_y-8 < 0)
+		checker_y = 8;
+	if (checker_y+8 > SCREEN_HT)
+		checker_y = SCREEN_HT-8;
 }
 
 
@@ -41,7 +72,7 @@ void stage00_draw(void)
     // Wipe the background with a color
     ClearBackground(0, 0, b);
 
-    DrawChecker(x, y); // Draw sprite after drawing background
+    DrawChecker(x_start, y_start); // Draw sprite after drawing background
 
     // Syncronize the RCP and CPU
     gDPFullSync(glistp++);
@@ -96,8 +127,8 @@ void DrawChecker(int x, int y)
         G_TX_NOMASK, G_TX_NOMASK, 
         G_TX_NOLOD, G_TX_NOLOD);
     gSPTextureRectangle(glistp++, 
-        x-8<<2, y-8<<2, 
-        (x + 8)<<2, (y + 8)<<2,
+        (int)(checker_x-8)<<2, (int)(checker_y-8)<<2, 
+        (int)(checker_x+8)<<2, (int)(checker_y+8)<<2,
         G_TX_RENDERTILE, 
         0 << 5, 0 << 5, 
         1 << 10, 1 << 10);
